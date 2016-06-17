@@ -279,12 +279,18 @@ public class HistogramLogReader {
                 return histogram;
 
             } catch (java.util.NoSuchElementException ex) {
-                return null;
+            	scanner.nextLine(); // Move to next line. Very much needed for e.g. windows CR/LF lines
+            	return null;
             } catch (DataFormatException ex) {
+            	scanner.nextLine(); // Move to next line. Very much needed for e.g. windows CR/LF lines
                 return null;
             }
         }
         return null;
+    }
+
+    public boolean hasNext() {
+    	return scanner.hasNextLine();
     }
 
 }
